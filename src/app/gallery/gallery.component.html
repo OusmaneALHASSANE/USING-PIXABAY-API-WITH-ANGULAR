@@ -1,0 +1,88 @@
+<p></p>
+
+<div class="container">
+
+    <br/>
+    <div class="row">
+      <div class="col-12 col-md-10 col-lg-8">
+        <form class="card card-sm">
+          <div class="card-body row no-gutters align-items-center">
+            <div class="col-auto">
+              <i class="fas fa-search h4 text-body"></i>
+            </div>
+            <!--end of col-->
+            <div class="col">
+              <input class="form-control form-control-lg form-control-borderless" type="search"  [(ngModel)]="motCle" placeholder="Recherche de Photos">
+            </div>
+            <!--end of col-->
+            <div class="col-auto">
+              <button class="btn btn-lg btn-success" type="submit" (click)="getImages()">Search</button>
+            </div>
+            <!--end of col-->
+          </div>
+        </form>
+      </div>
+      <!--end of col-->
+    </div>
+<div *ngIf="mode=='LIST'">
+  <p></p>
+  <div CLASS="row">
+     <div *ngFor="let im of images.hits" class="col-md-3 col-xs-12">
+       <div class="card hauteur">
+         <div class="card-header btn-primary">{{im.tags}}</div>
+         <div class="card-body">
+           <p>Size: <strong>{{im.imageWidth}} X {{im.imageHeight}}
+           </strong></p>
+           <img (click)="detailImage(im)" src="{{im.previewURL}}" CLASS="img-thumbnail clickable">
+           <p>By   <strong>{{im.user}}</strong></p>
+         </div>
+       </div>
+       <p></p>
+     </div>
+  </div>
+<div class="align-content-center">
+  <nav aria-label="Page navigation example">
+    <ul class="pagination">
+      <li class="page-item">
+        <a class="page-link" href="#" aria-label="Previous">
+          <span aria-hidden="true">«</span>
+          <span class="sr-only">Previous</span>
+        </a>
+      </li>
+      <li [ngClass]="{'active':currentPage==(i+1)}" *ngFor="let p of pages; let i=index" class="page-item">
+        <a class="page-link" (click)="gotoPage(i+1)">{{i+1}}</a>
+      </li>
+      <li class="page-item">
+        <a class="page-link" href="#" aria-label="Next">
+          <span aria-hidden="true">»</span>
+          <span class="sr-only">Next</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</div>
+</div>
+</div>
+
+  <div *ngIf="mode=='DETAIL'" CLASS="container">
+    <p></p>
+    <div class="container padding">
+      <button class="btn btn-primary" (click)="mode='LIST'">Mode Liste</button>
+    </div>
+    <div class="card">
+      <div class="card-header btn btn-primary" >{{currentImage.tags}}</div>
+      <div class="card-body">
+        <p>
+          Size: <strong>{{currentImage.imageWidth}} X {{currentImage.imageHeight}}</strong>, By
+          {{currentImage.user}}
+        </p>
+        <div>
+          <img src="{{currentImage.userImageURL}}" class="img-circle">
+          <img src="{{currentImage.webformatURL}}" class="img-thumbnail">
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+

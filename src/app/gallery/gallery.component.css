@@ -1,0 +1,11 @@
+.padding {
+  padding: 5px;
+  margin: 5px;
+}
+.border{
+  border: 1px dotted gray;
+}
+.hauteur {
+  height: 280px;
+}
+.pagination>li>a { border-radius: 50% !important;margin: 0 5px;}
